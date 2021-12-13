@@ -1,0 +1,338 @@
+body{
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: white;
+	background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/11/Electric-Guitar-Desktop-Pictures.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 100%;
+	background-size: cover;  
+}
+html{
+	height: 100%;
+}
+
+.twt-main{
+	height: 100%;
+	width: 100%;
+}
+.twt-login{
+	display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 1fr;
+    width: 50%;
+    height: 100vh;
+    position: relative;
+	background-color: rgb(234, 128, 252);
+	float:	center;
+}
+
+.twitterIcon-bird{
+	position: absolute;
+	width: 1200px;
+	top: -145px;
+	left: 15px;
+    overflow: hidden;
+}
+.login-box{
+	margin-left: 60px;
+	margin-top: 31px;
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr auto;
+	font-size: 14px;
+	line-height: 20px;
+	width: 210px;
+	height: 46px;
+	grid-column-gap: 10px;
+}
+.input-box{
+	border: 1px solid #e6ecf0;
+	border-radius: 3px;
+	box-sizing: border-box;
+	padding: 15px;
+    width: 210px;
+}
+.input-box:focus {
+	outline: none;
+}
+::placeholder{
+	font-size: 14px;
+	line-height: 20px;
+}
+.login-btn{
+	background-color: rgb(223, 193, 236);
+    border: 1px solid #e623d5;
+	color: rgb(0, 0, 0);
+	border-radius: 80px;
+	font-weight: 700;
+	font-size: 14px;
+    width: 70px;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+}
+.login-btn:hover {
+	background-color: #cc1feb78;
+    transition: all 0.2s;
+}
+
+.login-link{
+	grid-area: 2/2/3/3;
+	color: #000000;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.slow-login{
+	justify-self: center;
+	width: 355px;
+	height: 100px;
+	color: #14171a;
+	font-weight: 700;
+}
+.login-bird{
+	width: 60px;
+	display: block;
+}
+.login-small-display{
+	display:none; 
+}
+.front-para{
+	font-size: 27px;
+	line-height: 32px;
+	display: block;
+	margin-bottom: 50px;
+}
+.join{
+	font-size: 18px;
+	line-height: 24px
+}
+.signup-btn{
+	margin-top: 15px;
+	background-color: #f21df2;
+    border: 1px solid #f21da0;
+	color: #fff;
+	margin-right: auto; /* 1 */
+	margin-left:  auto; /* 1 */
+  
+	max-width: 900px; /* 2 */
+  
+	padding-right: 10px; /* 3 */
+	padding-left:  10px; /* 3 */
+}
+.signin-btn{
+	background-color: rgb(223, 37, 145);
+    border: 1px solid #f0053f;
+	color: #fff;
+}
+
+.pri-btn{
+	border-radius: 100px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+	margin-bottom: 16px;
+	width: 100px;
+	
+}
+.twt-features{
+	background: url('https://www.rollingstone.com/wp-content/uploads/2018/07/linkin-park-remembers-chester-bennington.jpg');
+	background-repeat: no-repeat;
+	background-size:800px 800px ;
+	background-position:0px -140px;
+	width: 50%;
+	height: 100vh;
+	background-color: #1da1f2;
+	float: left;
+}
+.features-div{
+	margin:auto;
+	width: 400px;
+	margin-top: 230px;
+}
+.twt-icon{
+	position: relative;
+	float: left;
+	width: 30px;
+	margin-right: 20px;
+}
+.twt-features p{
+	position: relative;
+	top: 5px;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
+	color: #fff;
+	padding-bottom: 30px;
+}
+footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	border-top: 1px solid #e6ecf0;
+    background-color: #fff;
+}
+ul{
+	background: #fff;
+    display: flex;
+	color: #aab8c2;
+}
+li{
+    display: inline-block;
+	padding-left: 18px; 
+	font-size: 12px;
+}
+
+footer a{
+	color: #aab8c2;
+	text-decoration: none;
+}
+
+.error-li {
+	margin:25px 0px;
+}
+
+.span-fp-error{
+	overflow: hidden;
+	padding: 5px;
+	border: 1px dashed #d89797;
+	border-radius: 3px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #a75858;
+}
+
+.sign-card{
+	
+	box-shadow: 0 4px 8px 0 rgb(255, 255, 255);
+	transition: 0.3s;
+	max-width: 400px;
+	max-height: 300px;
+ 	margin: auto;
+	margin-right:50px;
+  	text-align: center;
+  	font-family: arial;
+	background-color: #D3D3D3;  
+
+}
+
+@media (max-width:800px){
+
+	.twt-main{
+		display: grid;
+		min-height: 600px;
+	}
+	.twt-features{
+		width: auto;
+		height: 40vh;
+		background-size: 180%
+	}
+	.features-div{
+		margin-top: 50px;
+	}
+	.twt-login{
+		width: auto;
+		height: 60vh;
+	}
+	/* .twt-login form{
+		display: none;
+	} */
+	footer ul{
+		display: inline;
+		text-align: right;
+	}
+	.login-bird{
+		display: inline-block;
+	}
+
+	.login-box {
+		margin-left: 0;
+		grid-template-rows: 1fr 1fr;
+	    grid-template-columns: 1fr 1fr;
+	}
+	.login-btn {
+		border-radius: 100px;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 20px;
+		padding: 6px 16px;
+		margin-bottom: 16px;
+		margin-top: 10px;
+		width:200px;
+	
+	}
+
+}
+
+.con {
+	width: 200%;
+	text-align: center;
+}
+button:focus {
+    outline: none !important;
+}
+
+.body-section{
+	padding:15px 30px 30px 30px;
+	overflow: hidden;
+	}
+	.body-section .form-input{
+	width: 100%;
+	padding: 15px 0px;
+	}
+	.body-section .form-input input[type='text']{
+	width: calc(100% - 30px);
+	border: 1px solid #D3D3D3;
+	border-radius: 1px;
+	padding:10px 10px;
+	box-shadow: 0px 0px 0px 5px rgb(239,244,247);
+	}
+	.body-section .form-input input[type='checkbox']{
+	float: left;
+	}
+	.body-section label{
+	color: #565656;
+	padding: 1px 5px;
+	float: left;
+	}
+	.body-section .btn-submit{
+	float: right;
+	background: #DEEDF4;
+	border:1px solid #B5CBCD;
+	color: #56778E;
+	font-weight: bold;
+	padding:7px 20px;
+	border-radius: 15px;
+	}
+
+
+	.wrapper {
+		margin-right: auto; /* 1 */
+		margin-left:  620px; /* 1 */
+	  
+		max-width: 900px; /* 2 */
+	  
+		padding-right: 10px; /* 3 */
+		padding-left:  10px; /* 3 */
+	  }
+
+	  .container{
+		  margin-top: auto;
+		  background-color: #ffffff;
+	  }
+	  .text-lower{
+		  
+		margin-right: auto;
+	  }
+	  .container-2{
+
+		margin-top: 100px;
+		margin-left: 50px;
+	  }
+	  .feat{
+		font-family:fantasy;  
+		display: inline-block;
+	  }
