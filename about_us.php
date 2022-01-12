@@ -14,7 +14,9 @@
 
 <body style="font-size: 14.8px;">
 <nav class="navbar navbar-dark" style="background-color: #393f45;">
-  <p>&nbsp;</p>
+    <a class="navbar-brand">Ceol
+    </a>
+  </div>
 </nav>
 <br>
 <div class="container">

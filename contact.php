@@ -10,53 +10,32 @@
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 		<link rel="shortcut icon" type="image/png" href="https://www.pinclipart.com/picdir/middle/24-247211_rejected-stamp-clipart-guitar-cartoon-guitar-transparent-background.png"> 
+		<style type="text/css">
+			.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+		</style>
 </head>
 
 <body>
 
- <nav class="navbar navbar-dark" style="background-color: #393f45;">
-<p>&nbsp;</p>
+<nav class="navbar navbar-dark" style="background-color: #393f45;">
+    <a class="navbar-brand">Ceol
+    </a>
+  </div>
 </nav>
 <br>
-<div class="row" >
-	<div class="container">
-	<div class="row-style-login-page-panel">
-		<div class="col">
-			<h2>LIVE SUPPORT</h2>
-			<h3>24 hours | 7 days a week | 365 days a year Live Technical Support</h3>
-			<p>For any technical or non technical issues related to usable of this site, our team is present 24/7 to answer any query. Please enter your information and problem faced in the form, and our team will contact you at the soonest.</p>
-			</div>
-
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="container">
-	<div class="row-style-login-page-pannel" >
-		<div class="col" >
-			<h3>CONTACT US</h3>
-			<form method="post"  action="contact.php">
-				<div class="form-group">
-					Name:<input type="text" class="form-control" name="name" >
-				</div>
-
-				<div class="form-group">
-					Email:<input type="email" class="form-control" name="email" >
-				</div>
-
-				<div class="form-group">
-					Message:<textarea rows="4"  class="form-control" name="message"></textarea>
-				</div>
-
-					<button class="btn btn-primary" type="submit" value="Submit"  name="button">Submit</button>						
-						</button>
-
-			</form>
-			
-			</div>
-</div></div></div>
-		</div>
-	</div>
+<div>
+	<center><br><br><br><br><br>
+	<p>Your response has been submitted successfully.</p>
+	<p>Click <a href="http://localhost/phpmyadmin/Ceol/contact_us.php">here</a> to go back.</p>
+	</center>
 </div>
 
 <div>
