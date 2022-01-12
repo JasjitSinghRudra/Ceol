@@ -45,10 +45,10 @@
 }
 @media screen and (min-width: 768px){
     .main{
-        margin-left: 42%; 
+        margin-left: 48%; 
     }
     .sidenav{
-        width: 40%;
+        width: 45%;
         position: fixed;
         z-index: 1;
         top: 0;
