@@ -14,8 +14,10 @@
 
 <body>
 
- <nav class="navbar navbar-dark" style="background-color: #393f45;">
-<p>&nbsp;</p>
+<nav class="navbar navbar-dark" style="background-color: #393f45;">
+    <a class="navbar-brand">Ceol
+    </a>
+  </div>
 </nav>
 <br>
 <div class="row" >
