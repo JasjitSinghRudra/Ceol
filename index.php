@@ -83,7 +83,7 @@
 <nav class="navbar navbar-dark" style="background-color: #393f45;">
   <p>&nbsp;</p>
 </nav>
-<div class="sidenav" style="background:url('http://www.wallpaperup.com/uploads/wallpapers/2012/10/21/20181/cad2441dd3252cf53f12154412286ba0.jpg');">
+<div class="sidenav" style="background:url('https://media.pitchfork.com/photos/5d31de0c9e99e60008b9e5c3/16:9/w_1696,h_954,c_limit/Nirvana.png');">
          <div class="login-main-text">
             <h2>Ceol</h2>
             <p>Welcome to the world of Artists</p>
@@ -172,10 +172,10 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/about_us.php">About Us</a>
+        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/about_us.php" style="color:white;">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/contact_us.php">Contact and Support</a>
+        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/contact_us.php" style="color:white;">Contact and Support</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
