@@ -49,15 +49,12 @@
 				</div>
 
 					<button class="btn btn-primary" type="submit" value="Submit"  name="button">Submit</button>						
-						</button>
 
 			</form>
 			
 			</div>
 </div></div></div>
-		</div>
-	</div>
-</div>
+
 
 <div>
       <nav class="navbar fixed-bottom navbar-expand-lg navbar-light">
