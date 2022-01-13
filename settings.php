@@ -14,7 +14,7 @@
 
 <body style="font-size: 14.8px;">
  <nav class="navbar navbar-dark" style="background-color: #393f45;">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="http://localhost/phpmyadmin/Ceol/home.php">
       <form class="form-inline my-2 my-lg-0">Ceol
       </form>
     </a>
