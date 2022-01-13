@@ -39,7 +39,7 @@
 <div class="sidebar"> 
   <a href="#Profile"><img src="https://raw.githubusercontent.com/jk9936/Ceol/main/assets/images/ace.jpeg" class="img-thumbnail" style="border-radius: 50%;">&nbsp;Portgas D. Ace</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="http://localhost/phpmyadmin/Ceol/messages.php"><i class="fa fa-paper-plane"></i> Messages</a>&nbsp;
-  <a href="#notifications"><i class="fa fa-fw fa-bell"></i>Notification</a>&nbsp;
+  <a href="http://localhost/phpmyadmin/Ceol/notification.php"><i class="fa fa-fw fa-bell"></i>Notification</a>&nbsp;
   <a href="http://localhost/phpmyadmin/Ceol/Jamboard.php"><i class="fa fa-fw fa-wrench"></i> Jam Board</a>&nbsp;
   <a href="http://localhost/phpmyadmin/Ceol/friend_list.php"><i class="fa fa-fw fa-user"></i> Friends </a>&nbsp;
 </div>
