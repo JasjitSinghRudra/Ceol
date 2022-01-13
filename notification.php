@@ -1,320 +1,249 @@
-<?php  
-        include 'core/init.php';
-
-        $user_id = $_SESSION['user_id'];
-        $user = User::getData($user_id);
-        $who_users = Follow::whoToFollow($user_id);
-
-        // update notification count
-        User::updateNotifications($user_id);
-  
-        $notify_count = User::CountNotification($user_id);
-        $notofication = User::notification($user_id);
-        // var_dump($notofication);
-        // die();
-            if (User::checkLogIn() === false) 
-            header('location: index.php');    
-
-?>
- 
-<!DOCTYPE html>
-<html lang="en">
+<?php include 'footer.php';?>
+<?php include 'Sidepanel.php';?>
+<html>
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications | Ceol</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/profile_style.css?v=<?php echo time(); ?>">
-  
+    <title>Notifications | ceol</title>
+    
     <link rel="shortcut icon" type="image/png" href="https://cdn-icons.flaticon.com/png/512/461/premium/461146.png?token=exp=1639386067~hmac=226052811f9712abd43effaba8ddbad6"> 
-   
-</head>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/home_style.css?v=<?php echo time(); ?>">
+        <link rel="shortcut icon" type="image/png" href="https://www.pinclipart.com/picdir/middle/24-247211_rejected-stamp-clipart-guitar-cartoon-guitar-transparent-background.png">
+
+
+
+<style>
+    .imessage {
+  background-color: #fff;
+  border: 1px solid #e5e5ea;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "SanFrancisco";
+  font-size: 1.25rem;
+  margin: 0 auto 1rem;
+  max-width: 600px;
+  padding: 0.5rem 1.5rem;
+}
+
+.imessage p {
+  border-radius: 1.15rem;
+  line-height: 1.25;
+  max-width: 75%;
+  padding: 0.5rem .875rem;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.imessage p::before,
+.imessage p::after {
+  bottom: -0.1rem;
+  content: "";
+  height: 1rem;
+  position: absolute;
+}
+
+p.from-me {
+  align-self: flex-end;
+  background-color: #248bf5;
+  color: #fff; 
+}
+
+p.from-me::before {
+  border-bottom-left-radius: 0.8rem 0.7rem;
+  border-right: 1rem solid #248bf5;
+  right: -0.35rem;
+  transform: translate(0, -0.1rem);
+}
+
+p.from-me::after {
+  background-color: #fff;
+  border-bottom-left-radius: 0.5rem;
+  right: -40px;
+  transform:translate(-30px, -2px);
+  width: 10px;
+}
+
+p[class^="from-"] {
+  margin: 0.5rem 0;
+  width: fit-content;
+}
+
+p.from-me ~ p.from-me {
+  margin: 0.25rem 0 0;
+}
+
+p.from-me ~ p.from-me:not(:last-child) {
+  margin: 0.25rem 0 0;
+}
+
+p.from-me ~ p.from-me:last-child {
+  margin-bottom: 0.5rem;
+}
+
+p.from-them {
+  align-items: flex-start;
+  background-color: #e5e5ea;
+  color: #000;
+}
+
+p.from-them:before {
+  border-bottom-right-radius: 0.8rem 0.7rem;
+  border-left: 1rem solid #e5e5ea;
+  left: -0.35rem;
+  transform: translate(0, -0.1rem);
+}
+
+p.from-them::after {
+  background-color: #fff;
+  border-bottom-right-radius: 0.5rem;
+  left: 20px;
+  transform: translate(-30px, -2px);
+  width: 10px;
+}
+
+p[class^="from-"].emoji {
+  background: none;
+  font-size: 2.5rem;
+}
+
+p[class^="from-"].emoji::before {
+  content: none;
+}
+
+.no-tail::before {
+  display: none;
+}
+
+.margin-b_none {
+  margin-bottom: 0 !important;
+}
+
+.margin-b_one {
+  margin-bottom: 1rem !important;
+}
+
+.margin-t_one {
+  margin-top: 1rem !important;
+}
+
+/* general styling */
+@font-face {
+  font-family: "SanFrancisco";
+  src:
+    url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+    url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+}
+
+body {  
+  font-family: -apple-system, 
+    BlinkMacSystemFont, 
+    "Segoe UI", 
+    Roboto, 
+    Oxygen-Sans, 
+    Ubuntu, 
+    Cantarell, 
+    "Helvetica Neue", 
+    sans-serif;
+  font-weight: normal;
+  margin: 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 1rem;
+}
+
+h1 {
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  border-bottom: 1px solid #e5e5ea;
+  color: #666;
+  font-weight: normal;
+  margin-top: 0;
+  padding-bottom: 1.5rem;
+}
+
+.comment {
+  color: #222;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  max-width: 100%;
+  padding: 0;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    margin: 0 0.5rem;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+
+  .imessage {
+    font-size: 1.05rem;
+    margin: 0 auto 1rem;
+    max-width: 600px;
+    padding: 0.25rem 0.875rem;
+  }
+
+  .imessage p {
+    margin: 0.5rem 0;
+  }
+}
+</style>
+</head>    
 <body>
++   <nav class="navbar fixed-top navbar-dark" style="background-color: #393f45;">
+    <a class="navbar-brand" href="http://localhost/phpmyadmin/Ceol/home.php">
+      <form class="form-inline my-2 my-lg-0">Ceol&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 500px !important;">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </a>
+    <a class="navbar-brand" href="http://localhost/phpmyadmin/Ceol/index.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;<img src="https://raw.githubusercontent.com/jk9936/Ceol/main/assets/images/logout.png" width="22" height="20"></a>
+           <a class="navbar-brand" href="http://localhost/phpmyadmin/Ceol/settings.php">&nbsp;Settings&nbsp;<img src="https://raw.githubusercontent.com/jk9936/Ceol/main/assets/images/settings.png" width="22" height="20"></a>
+  <div class="collapse navbar-collapse" id="navbarNav">
 
-<script src="assets/js/jquery-3.5.1.min.js"></script>
+  </div>
+</nav>
+<br><br><br><br>
+<center>
+  <h1 class="display-6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Friends</h1>
+    <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is a list of all your notifications.</p>
+  <ul class="list-group" style="margin-left: 20%; margin-right: 20%; text-align: left;">
+  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You currently have no new notifications</li>
+</ul>
+<br><br>
 
-   
-    <div id="mine">
-    <div class="wrapper-left">
-        <div class="sidebar-left">
-          <div class="grid-sidebar" style="margin-top: 12px">
-            <div class="icon-sidebar-align">
-              <img src="https://cdn-icons.flaticon.com/png/512/461/premium/461146.png?token=exp=1639386067~hmac=226052811f9712abd43effaba8ddbad6" alt="" height="30px" width="30px" />
-            </div>
-          </div>
-
-          <a href="home.php">
-          <div class="grid-sidebar bg-active" style="margin-top: 12px">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/6tKFLWG/home.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-            <div class="wrapper-left-elements">
-              <a href="home.php" style="margin-top: 4px;"><strong>Home</strong></a>
-            </div>
-          </div>
-          </a>
-  
-           <a href="notification.php">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align position-relative">
-                <?php if ($notify_count > 0) { ?>
-              <i class="notify-count"><?php echo $notify_count; ?></i> 
-              <?php } ?>
-              <img
-                src="https://i.ibb.co/Gsr7qyX/notification.png"
-                alt=""
-                height="26.25px"
-                width="26.25px"
-              />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a class="wrapper-left-active" href="notification.php" style="margin-top: 4px"><strong>Notification</strong></a>
-            </div>
-          </div>
-          </a>
-        
-            <a href="<?php echo BASE_URL . $user->username; ?>">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/znTXjv6/perfil.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <!-- <a href="/twitter/<?php echo $user->username; ?>"  style="margin-top: 4px"><strong>Profile</strong></a> -->
-              <a  href="<?php echo BASE_URL . $user->username; ?>"  style="margin-top: 4px"><strong>Profile</strong></a>
-            
-            </div>
-          </div>
-          </a>
-          <a href="<?php echo BASE_URL . "account.php"; ?>">
-          <div class="grid-sidebar ">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/znTXjv6/perfil.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a href="<?php echo BASE_URL . "account.php"; ?>" style="margin-top: 4px"><strong>Settings</strong></a>
-            </div>
-           
-            
-          </div>
-          </a>
-          <a href="includes/logout.php">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align">
-            <i style="font-size: 26px; color:red" class="fas fa-sign-out-alt"></i>
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a style="color:red" href="includes/logout.php" style="margin-top: 4px"><strong>Logout</strong></a>
-            </div>
-          </div>
-          </a>
-          <button class="button-twittear">
-            <strong>Post</strong>
-          </button>
-  
-          <div class="box-user">
-            <div class="grid-user">
-              <div>
-                <img
-                  src="assets/images/users/<?php echo $user->img ?>"
-                  alt="user"
-                  class="img-user"
-                />
-              </div>
-              <div>
-                <p class="name"><strong><?php if($user->name !== null) {
-                echo $user->name; } ?></strong></p>
-                <p class="username">@<?php echo $user->username; ?></p>
-              </div>
-              <div class="mt-arrow">
-                <img
-                  src="https://i.ibb.co/mRLLwdW/arrow-down.png"
-                  alt=""
-                  height="18.75px"
-                  width="18.75px"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-          
-  
-
-      <div class="grid-posts">
-        <div class="border-right">
-          <div class="grid-toolbar-center">
-            <div class="center-input-search">
-              
-            </div>
-           
-          </div>
-
-          <div class="box-fixed" id="box-fixed"></div>
-  
-          <div class="box-home feed">
-               <div class="container">
-                 <div style="border-bottom: 1px solid #F5F8FA;"  class="row position-fixed box-name">
-                       <div class="col-xs-2">
-                       <a href="javascript: history.go(-1);"> <i style="font-size:20px;" class="fas fa-arrow-left arrow-style"></i> </a>
-                       </div>
-                       <div class="col-xs-10">
-                           <p style="margin-top: 12px;" class="home-name"> Notifications</p>
-                      </div>
-                 </div>
-
-                 </div> 
-                 <div class="container mt-5">
-
-                     <?php foreach($notofication as $notify) { 
-                         $user = User::getData($notify->notify_from);
-                         $timeAgo = Tweet::getTimeAgo($notify->time);
-                         ?>
-                     <?php if ($notify->type == 'like') { 
-                        $icon = "<i style='color: red;font-size:30px;' class='fa-heart  fas ml-2'></i>";
-                        $msg = "Liked Your Tweet";
-                        } else if ($notify->type == 'retweet') { 
-                            $icon = "<i style='font-size:30px;color: rgb(22, 207, 22);'  class='fas fa-retweet ml-2'></i>";
-                            $msg = "Retweeted Your Tweet";
-                        } else if ($notify->type == 'qoute') { 
-                            $icon = "<i style='font-size:30px;color: rgb(22, 207, 22);'  class='fas fa-retweet ml-2'></i>";
-                            $msg = "Qouted Your Tweet";
-                        } else if ($notify->type == 'comment') { 
-                            $icon = "<i style='font-size:30px;' class='far fa-comment ml-2'></i>";
-                            $msg = "Comment to your Tweet";
-                        } else if ($notify->type == 'reply') { 
-                            $icon = "<i style='font-size:30px;' class='far fa-comment ml-2'></i>";
-                            $msg = "Reply to your Comment";
-                        } else if ($notify->type == 'follow') { 
-                            $icon = "<i style='font-size:30px;' class='fas fa-user ml-2'></i>";
-                            $msg = "Followed You";
-                        } else if ($notify->type == 'mention') { 
-                          $icon = "<i style='font-size:30px;' class='fas fa-user ml-2'></i>";
-                          $msg = "Mention you in Tweet";
-                        }?>
-                      
-                     <div style="position: relative; border-bottom:4px solid #F5F8FA;" class="box-tweet py-3 ">
-                        <a href="
-                        <?php if ($notify->type == 'follow'){ 
-                            echo $user->username;
-                        } else { ?>
-                            status/<?php echo $notify->target; ?>
-                        <?php } ?>  ">
-                        <span style="position:absolute; width:100%; height:100%; top:0;left: 0; z-index: 1;"></span>
-                        </a>
-                            <div class="grid-tweet">
-                                <div class="icon mt-2">
-                                    <?php echo $icon; ?>
-                                </div>
-                                <div class="notify-user">
-                                    <p>
-                                    <a style="position: relative; z-index:1000;" href="<?php echo $user->username;  ?>">
-                                        <img class="img-user" src="assets/images/users/<?php echo $user->img ?>" alt="">
-                                    </a> 
-                                    
-                                    </p>
-                                    <p> <a style="font-weight: 700;
-                                    font-size:18px;
-                                    position: relative; z-index:1000;" href="<?php echo $user->username; ?>">
-                                    <?php echo $user->name; ?> </a> <?php echo $msg; ?> 
-                                    <span style="font-weight: 500;" class="ml-3">
-                                      <?php echo $timeAgo; ?>
-                                    </span> 
-                                  </p>
-                                </div>
-                            </div>
-                        </div> 
-                     <?php  } ?> 
-                 </div>
-                
-               
-        
-        </div>
-        </div> 
-
-        <div class="wrapper-right">
-            <div style="width: 90%;" class="container">
-
-            <div class="input-group py-2 m-auto pr-5 position-relative">
-
-            <i id="icon-search" class="fas fa-search tryy"></i>
-            <input type="text" class="form-control search-input"  placeholder="Search Ceol">
-            <div class="search-result">
+</center>
 
 
-            </div>
-            </div>
-            </div>
-
-
-
-            <div class="box-share">
-            <p class="txt-share"><strong>Whom to follow</strong></p>
-            <?php 
-            foreach($who_users as $user) { 
-              //  $u = User::getData($user->user_id);
-               $user_follow = Follow::isUserFollow($user_id , $user->id) ;
-               ?>
-          <div class="grid-share">
-          <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
-                      <img
-                        src="assets/images/users/<?php echo $user->img; ?>"
-                        alt=""
-                        class="img-share"
-                      />
-                    </a>
-                    <div>
-                      <p>
-                      <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">  
-                      <strong><?php echo $user->name; ?></strong>
-                      </a>
-                    </p>
-                      <p class="username">@<?php echo $user->username; ?>
-                      <?php if (Follow::FollowsYou($user->id , $user_id)) { ?>
-                  <span class="ml-1 follows-you">Follows You</span></p>
-                  <?php } ?></p></p>
-                    </div>
-                    <div>
-                      <button class="follow-btn follow-btn-m 
-                      <?= $user_follow ? 'following' : 'follow' ?>"
-                      data-follow="<?php echo $user->id; ?>"
-                      data-user="<?php echo $user_id; ?>"
-                      data-profile="<?php echo $profileData->id; ?>"
-                      style="font-weight: 700;">
-                      <?php if($user_follow) { ?>
-                        Following 
-                      <?php } else {  ?>  
-                          Follow
-                        <?php }  ?> 
-                      </button>
-                    </div>
-                  </div>
-
-                  <?php }?>
-         
-          
-          </div>
-  
-  
-        </div>
-      </div> </div>
-      
-           <script src="assets/js/search.js"></script>
-            <script src="assets/js/photo.js"></script>
-            <script src="assets/js/follow.js?v=<?php echo time(); ?>"></script>
-            <script src="assets/js/users.js?v=<?php echo time(); ?>"></script>
-            <script type="text/javascript" src="assets/js/hashtag.js"></script>
+<script src="assets/js/search.js"></script>
+          <script src="assets/js/photo.js?v=<?php echo time(); ?>"></script>
+          <script type="text/javascript" src="assets/js/hashtag.js"></script>
           <script type="text/javascript" src="assets/js/like.js"></script>
           <script type="text/javascript" src="assets/js/comment.js?v=<?php echo time(); ?>"></script>
           <script type="text/javascript" src="assets/js/retweet.js?v=<?php echo time(); ?>"></script>
+          <script type="text/javascript" src="assets/js/follow.js?v=<?php echo time(); ?>"></script>
       <script src="https://kit.fontawesome.com/38e12cc51b.js" crossorigin="anonymous"></script>
       <!-- <script src="assets/js/jquery-3.4.1.slim.min.js"></script> -->
       <script src="assets/js/jquery-3.5.1.min.js"></script>
+
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+
+</body>   
 </html>
