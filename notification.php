@@ -222,7 +222,7 @@ h2 {
   <h1 class="display-6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Friends</h1>
     <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is a list of all your notifications.</p>
   <ul class="list-group" style="margin-left: 20%; margin-right: 20%; text-align: left;">
-  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You currently have no new notifications</li>
+  <li class="list-group-item">&nbsp; Pending friend request from BlackBeard<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 35%;">Accept</button><button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="margin-left: 5%;">Reject</button></li>
 </ul>
 <br><br>
 
