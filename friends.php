@@ -30,7 +30,7 @@
   <a href="#">Marco</a>
   <a href="#">Sanji</a>
   <a href="#">Roronoa Zoro</a>
-  <a href="#">Luffy.D</a>
+  <a href="#">Luffy❤️</a>
   <a href="#">Garp</a>
   <a href="#">WhiteBeard</a>
   <a href="#">Kaido</a>

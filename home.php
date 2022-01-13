@@ -176,7 +176,7 @@ p.from-them {
     <div class="overlay"></div>
     
     <section>
-        <div class="posts">
+      <div class="posts">
         <i class="fa fa-user-circle" style="font-size:50px" >Nami</i>
         <br><br>
         <p class="from-them margin-b_one">Loved Luffy in his last performance can't wait to see him again at the Marine Ford party!!!! <br> P.S: GO LITTLE ROCKSTAR!</p>
