@@ -1,22 +1,10 @@
+<?php include 'footer.php';?>
+<?php include 'header.php';?>
+<?php include 'Sidepanel.php';?>
+<?php include 'recent_activity.php';?>
 
 
-<?php
-  
-   include 'core/init.php';
-  
-   $user_id = $_SESSION['user_id'];
 
-   $user = User::getData($user_id);
-   
-   if (User::checkLogIn() === false) 
-   header('location: index.php');
-
-
-   $tweets = Tweet::tweets($user_id);
-   $who_users = Follow::whoToFollow($user_id);
-   $notify_count = User::CountNotification($user_id);
-  
-?>
     
 
 <!DOCTYPE html>
@@ -30,343 +18,187 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/all.min.css">
         <link rel="stylesheet" href="assets/css/home_style.css?v=<?php echo time(); ?>">
-    
-   
+    <style>
+        *{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  
+}
+
+section {
+  float: center;
+  width: 90%;
+}
+.posts {
+    background-color: #F7F7F7;
+}
+section div {
+  width: 600px;
+  margin: 50px auto;
+  background-color: #F7F7F7;
+  overflow: hidden;
+  padding: 20px;
+  padding-right:30px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0,0.3,0.3,.3);
+  z-index: 3;
+  float: center;
+}
+section div img {
+  float:left;
+  width: 60px;
+  height: 60px;
+  padding-bottom:20px;
+}
+section div textarea {
+  width: 550px;
+  height: 150px;
+  border: none;
+  padding-top:30px;
+  padding: 5px 10px;
+  font-family: arial;
+  resize: none;
+  outline: none;
+  border-bottom: 2px solid #0077CC;
+}
+textarea::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background-color: #CCC;
+  border-radius: 2px
+}
+section div [type = submit] {
+  padding-left: 50px;
+  margin: 15px 10px auto auto;
+  border: none;
+  background-color: #0077CC;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+.overlay {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  display: none;
+}
+.post {
+  background-color: #fff;
+  width: 500px;
+  margin: 10px auto;
+  padding: 10px;
+  color: #333;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  border-radius: 3px;
+}
+
+.imessage {
+  background-color: #fff;
+  border: 1px solid #e5e5ea;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "SanFrancisco";
+  font-size: 1.25rem;
+  margin: 0 auto 1rem;
+  max-width: 600px;
+  padding: 0.5rem 1.5rem;
+}
+
+.imessage p {
+  border-radius: 1.15rem;
+  line-height: 1.25;
+  max-width: 75%;
+  padding: 0.5rem .875rem;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.imessage p::before,
+.imessage p::after {
+  bottom: -0.1rem;
+  content: "";
+  height: 1rem;
+  position: absolute;
+}
+p.from-them {
+  align-items: flex-start;
+  background-color: #e5e5ea;
+  color: #000;
+}
+.margin-b_none {
+  margin-bottom: 0 !important;
+}
+
+.margin-b_one {
+  margin-bottom: 1rem !important;
+}
+
+        </style>
+        
 </head>
 <body>
-  <!-- This is a modal for welcome the new signup account! -->
-
-  <script src="assets/js/jquery-3.5.1.min.js"></script>
-     
-    <?php  if (isset($_SESSION['welcome'])) { ?>
-      <script>
-       $(document).ready(function(){
-        // Open modal on page load
-        $("#welcome").modal('show');
-      
- 
-       });
-      </script>
+<section>
+      <div class="text">
+        <i class="fa fa-user-circle" style="font-size:50px" ></i>
+        &nbsp;&nbsp;
+        <textarea placeholder="What's in your mind"></textarea>
+        <br>
+        <i class="fa fa-microphone"style="font-size:25px"></i>&emsp;&emsp;
+        <i class="fa fa-file-image-o"style="font-size:25px"></i>&emsp;&emsp;
+        <i class="fa fa-file-movie-o"style="font-size:25px"></i>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <input type="submit" value="post"/>
+      </div>
+    </section>
+    <div class="overlay"></div>
     
-
-      <!-- Modal -->
-<div class="modal fade" id="welcome" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div  class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="">
-        <div class="text-center">
-         <span  class="modal-title font-weight-bold text-center" id="exampleModalLongTitle">
-          <span style="font-size: 20px;">Welcome <span style="color:#207ce5"><?php echo $user->name; ?></span>  </span>  
-         </span>
+    <section>
+        <div class="posts">
+        <i class="fa fa-user-circle" style="font-size:50px" >Nami</i>
+        <br><br>
+        <p class="from-them margin-b_one">Loved Luffy in his last performance can't wait to see him again at the Marine Ford party!!!! <br> P.S: GO LITTLE ROCKSTAR!</p>
         </div>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        <div class="text-center">
-       
-        <h4 style="font-weight: 600; " >You Signup Successfuly!</h4>
- 
+    </section>
+
+    <section>
+        <div class="posts">
+        <i class="fa fa-user-circle" style="font-size:50px" >White Beard</i>
+        <br><br>
+        <p class="from-them margin-b_one">Enroute to Marineford going to crash the party! - with <u>Marco</u> and 200 others. </p>
         </div>
-        <p>This is Twitter clone made by <span style="font-weight: 700;">Amin Yasser</span>  for learning purpose.</p>
-        <p>The clone includes tweet , retweet , qoute or even qoute the qouted tweet , like tweet and nested comments.
-          you can mention or add hashtag to yout tweet , change password or username.
-          Follow or unfollow people. get notificaction if any action happen. Search users by name or username. and more!
-        </p>
-        <p>By Signing Up then you followed
-          <a style="color:#207ce5;" href="amin">@amin</a> 
-            by default to see tweets. you can change it anytime!</p>
-      </div>
-      
-    </div>
-  </div>
-</div>
+    </section>
 
-      <?php unset($_SESSION['welcome']); } ?>
-
-      <!-- End welcome -->
-
-    <div id="mine">
- 
-    <div class="wrapper-left">
-        <div class="sidebar-left">
-          <div class="grid-sidebar" style="margin-top: 12px">
-            <div class="icon-sidebar-align">
-              <img src="https://cdn-icons.flaticon.com/png/512/461/premium/461146.png?token=exp=1639386067~hmac=226052811f9712abd43effaba8ddbad6" alt="" height="30px" width="30px" />
-            </div>
-          </div>
-
-          <a href="home.php">
-          <div class="grid-sidebar bg-active" style="margin-top: 12px">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/6tKFLWG/home.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-            <div class="wrapper-left-elements">
-              <a class="wrapper-left-active" href="home.php" style="margin-top: 4px;"><strong>Home</strong></a>
-            </div>
-          </div>
-          </a>
-  
-           <a href="notification.php">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align position-relative">
-                <?php if ($notify_count > 0) { ?>
-              <i class="notify-count"><?php echo $notify_count; ?></i> 
-              <?php } ?>
-              <img
-                src="https://i.ibb.co/Gsr7qyX/notification.png"
-                alt=""
-                height="26.25px"
-                width="26.25px"
-              />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a href="notification.php" style="margin-top: 4px"><strong>Notification</strong></a>
-            </div>
-          </div>
-          </a>
-        
-            <a href="<?php echo BASE_URL . $user->username; ?>">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/znTXjv6/perfil.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <!-- <a href="/twitter/<?php echo $user->username; ?>"  style="margin-top: 4px"><strong>Profile</strong></a> -->
-              <a  href="<?php echo BASE_URL . $user->username; ?>"  style="margin-top: 4px"><strong>Profile</strong></a>
-            
-            </div>
-          </div>
-          </a>
-          <a href="<?php echo BASE_URL . "account.php"; ?>">
-          <div class="grid-sidebar ">
-            <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/znTXjv6/perfil.png" alt="" height="26.25px" width="26.25px" />
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a href="<?php echo BASE_URL . "account.php"; ?>" style="margin-top: 4px"><strong>Settings</strong></a>
-            </div>
-           
-            
-          </div>
-          </a>
-          <a href="includes/logout.php">
-          <div class="grid-sidebar">
-            <div class="icon-sidebar-align">
-            <i style="font-size: 26px; color:red" class="fas fa-sign-out-alt"></i>
-            </div>
-  
-            <div class="wrapper-left-elements">
-              <a style="color:red" href="includes/logout.php" style="margin-top: 4px"><strong>Logout</strong></a>
-            </div>
-          </div>
-          </a>
-          <button class="button-twittear">
-            <strong>Post</strong>
-          </button>
-  
-          <div class="box-user">
-            <div class="grid-user">
-              <div>
-                <img
-                  src="assets/images/users/<?php echo $user->img ?>"
-                  alt="user"
-                  class="img-user"
-                />
-              </div>
-              <div>
-                <p class="name"><strong><?php if($user->name !== null) {
-                echo $user->name; } ?></strong></p>
-                <p class="username">@<?php echo $user->username; ?></p>
-              </div>
-              <div class="mt-arrow">
-                <img
-                  src="https://i.ibb.co/mRLLwdW/arrow-down.png"
-                  alt=""
-                  height="18.75px"
-                  width="18.75px"
-                />
-              </div>
-            </div>
-          </div>
+    <section>
+        <div class="posts">
+        <i class="fa fa-user-circle" style="font-size:50px" >Garp</i>
+        <br><br>
+        <p class="from-them margin-b_one">Today is a great day Marines, Where is Brook and other Musicians?????</p>
         </div>
-      </div>
-          
+    </section>
 
-      <div class="grid-posts">
-        <div class="border-right">
-          <div class="grid-toolbar-center">
-            <div class="center-input-search">
-              <div class="input-group-login" id="whathappen">
-                
-                <div class="container">
-                  <div class="part-1">
-                    <div class="header">
-                      <div class="home">
-                        <h2>Home</h2>
-                      </div>
-                      <!-- <div class="icon">
-                        <button type="button" name="button">+</button>
-                      </div> -->
-                    </div>
-            
-                    <div class="text">
-                      <form class="" action="handle/handleTweet.php" method="post" enctype="multipart/form-data">
-                        <div class="inner">
-            
-                            <img src="assets/images/users/<?php echo $user->img ?>" alt="profile photo">
-                        
-                          <label>
-            
-                            <textarea class="text-whathappen" name="status" rows="8" cols="80" placeholder="What's Cooking New?"></textarea>
-                        
-                        </label>
-                        </div> 
-                            
-                         <!-- tmp image upload place -->
-                        <div class="position-relative upload-photo"> 
-                          <img class="img-upload-tmp" src="assets/images/tweets/tweet-60666d6b426a1.jpg" alt="">
-                          <div class="icon-bg">
-                          <i id="#upload-delete-tmp" class="fas fa-times position-absolute upload-delete"></i>  
-
-                          </div>
-                        </div>
-
-
-                        <div class="bottom"> 
-                          
-                          <div class="bottom-container">
-                              
-                            
-                              
-                           
-                            <label for="tweet_img" class="ml-3 mb-2 uni">
-
-                              <i class="fa fa-image item1-pair"></i>
-                            </label>
-                            <input class="tweet_img" id="tweet_img" type="file" name="tweet_img">    
-                                
-                          </div>
-                          <div class="hash-box">
-                        
-                              <ul style="margin-bottom: 0;">
-
-
-                              </ul>
-                          
-                          </div>
-                          <?php if (isset($_SESSION['errors_tweet'])) { 
-                            
-                            foreach($_SESSION['errors_tweet'] as $t) {?>
-                            
-                          <div class="alert alert-danger">
-                          <span class="item2-pair"> <?php echo $t; ?> </span>
-                          </div>
-                         
-                         <?php } } unset($_SESSION['errors_tweet']); ?>
-                          <div>
-                         
-                            <span class="bioCount" id="count">140</span>
-                            <input id="tweet-input" type="submit" name="tweet" value="Tweet" class="submit"
-                            >
-                          </div>
-                      </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="part-2">
-            
-                  </div>
-            
-                </div>
-                
-                
-              </div>
-            </div>
-            <!-- <div class="mt-icon-settings">
-              <img src="https://i.ibb.co/W5T9ycN/settings.png" alt="" />
-            </div> -->
-          </div>
-          <div class="box-fixed" id="box-fixed"></div>
-            
-          <?php  include 'includes/tweets.php'; ?>
-
+    <section>
+        <div class="posts">
+        <i class="fa fa-user-circle" style="font-size:50px" >Marco</i>
+        <br><br>
+        <p class="from-them margin-b_one">It&rsquo;s more like &ldquo;this is an earthquake. Check the Internet. Yup. Earthquake. This is the size. This is the epicenter. Check social media. Make sure the East Coast knows I&rsquo;m alive. Okay, try and go back to sleep.&rdquo;</p>
         </div>
+    </section>
 
 
-        <div class="wrapper-right">
-            <div style="width: 90%;" class="container">
-
-          <div class="input-group py-2 m-auto pr-5 position-relative">
-
-          <i id="icon-search" class="fas fa-search tryy"></i>
-          <input type="text" class="form-control search-input"  placeholder="Search Ceol">
-          <div class="search-result">
 
 
-          </div>
-          </div>
-          </div>
-
-
-       
-
-            
-          <div class="box-share">
-            <p class="txt-share"><strong>Who to follow</strong></p>
-            <?php 
-            foreach($who_users as $user) { 
-              //  $u = User::getData($user->user_id);
-               $user_follow = Follow::isUserFollow($user_id , $user->id) ;
-               ?>
-          <div class="grid-share">
-          <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
-                      <img
-                        src="assets/images/users/<?php echo $user->img; ?>"
-                        alt=""
-                        class="img-share"
-                      />
-                    </a>
-                    <div>
-                      <p>
-                      <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">  
-                      <strong><?php echo $user->name; ?></strong>
-                      </a>
-                    </p>
-                      <p class="username">@<?php echo $user->username; ?>
-                      <?php if (Follow::FollowsYou($user->id , $user_id)) { ?>
-                  <span class="ml-1 follows-you">Follows You</span></p>
-                  <?php } ?></p>
-                    </div>
-                    <div>
-                      <button class="follow-btn follow-btn-m 
-                      <?= $user_follow ? 'following' : 'follow' ?>"
-                      data-follow="<?php echo $user->id; ?>"
-                      data-user="<?php echo $user_id; ?>"
-                      data-profile="<?php echo $u_id; ?>"
-                      style="font-weight: 700;">
-                      <?php if($user_follow) { ?>
-                        Following 
-                      <?php } else {  ?>  
-                          Follow
-                        <?php }  ?> 
-                      </button>
-                    </div>
-                  </div>
-
-                  <?php }?>
-         
-          
-          </div>
-  
-  
-        </div>
-      </div>
-      </div> 
       <script src="assets/js/search.js"></script>
           <script src="assets/js/photo.js?v=<?php echo time(); ?>"></script>
           <script type="text/javascript" src="assets/js/hashtag.js"></script>
@@ -380,5 +212,6 @@
 
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </body>
 </html> 

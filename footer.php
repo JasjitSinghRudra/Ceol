@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/about_us.php">About Us</a>
+        <a class="nav-link" href="http://localhost/Ceol/about_us.php">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost/phpmyadmin/Ceol/contact_us.php">Contact and Support</a>
+        <a class="nav-link" href="http://localhost/Ceol/contact_us.php">Contact and Support</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
