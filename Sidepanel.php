@@ -41,5 +41,5 @@
   <a href="http://localhost/phpmyadmin/Ceol/messages.php"><i class="fa fa-paper-plane"></i> Messages</a>&nbsp;
   <a href="#notifications"><i class="fa fa-fw fa-bell"></i>Notification</a>&nbsp;
   <a href="http://localhost/phpmyadmin/Ceol/Jamboard.php"><i class="fa fa-fw fa-wrench"></i> Jam Board</a>&nbsp;
-  <a href="#clients"><i class="fa fa-fw fa-user"></i> Friends </a>&nbsp;
+  <a href="http://localhost/phpmyadmin/Ceol/friend_list.php"><i class="fa fa-fw fa-user"></i> Friends </a>&nbsp;
 </div>
